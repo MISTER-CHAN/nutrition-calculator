@@ -16,9 +16,9 @@ public class FoodListFragment extends ListFragment {
 
     private final FoodAdapter.OnListItemCheckedChangedListener onListItemCheckedChangedListener = (food, isChecked) -> {
         if (isChecked) {
-            Lists.I.checkedFoods.add(food);
+            Lists.I.checkedFoods.get(0L).add(food);
         } else {
-            Lists.I.checkedFoods.remove(food);
+            Lists.I.checkedFoods.get(0L).remove(food);
         }
     };
 

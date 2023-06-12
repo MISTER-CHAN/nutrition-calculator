@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +40,7 @@ public class FoodAdapter extends Adapter<String, ItemFoodBinding> {
         String food = getItem(position);
         holder.binding.tv.setText(food);
         holder.binding.cb.setOnCheckedChangeListener(null);
-        holder.binding.cb.setChecked(Lists.I.checkedFoods.contains(food));
+        holder.binding.cb.setChecked(Lists.I.checkedFoods.get(0L).contains(food));
         holder.binding.cb.setOnCheckedChangeListener((buttonView, isChecked) ->
                 onListItemCheckedChangedListener.onCheckedChanged(food, isChecked));
         return convertView;
