@@ -1,8 +1,11 @@
 package com.misterchan.nutritioncalculator;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Lists.I.populate(getAssets());
-        ;
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -63,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
                 .setOpenableLayout(drawer)
@@ -73,11 +73,18 @@ public class MainActivity extends AppCompatActivity {
         loadNavigation(navController);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // First run
+        binding.ivTips.setOnClickListener(v -> v.setVisibility(View.GONE));
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean("fr", true)) {
+            preferences.edit().putBoolean("fr", false).commit();
+            binding.ivTips.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         Menu ageGenderMenu = menu.findItem(R.id.action_age_gender).getSubMenu();
         List<Fragment> fragments = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main).getChildFragmentManager().getFragments();
@@ -109,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
             if (navController.getCurrentDestination().getId() != R.id.nav_calendar) {
                 navController.navigate(R.id.nav_calendar);
             }
+        } else if (itemId == R.id.action_tips) {
+            binding.ivTips.setVisibility(View.VISIBLE);
         } else {
             return false;
         }
