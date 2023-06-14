@@ -1,5 +1,6 @@
 package com.misterchan.nutritioncalculator;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    public MenuItem miTips;
     private NavController navController;
 
     private void loadNavigation(NavController navController) {
@@ -86,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        miTips = menu.findItem(R.id.action_tips);
+
         Menu ageGenderMenu = menu.findItem(R.id.action_age_gender).getSubMenu();
         List<Fragment> fragments = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main).getChildFragmentManager().getFragments();
         for (String name : Lists.I.ageGenderNames) {

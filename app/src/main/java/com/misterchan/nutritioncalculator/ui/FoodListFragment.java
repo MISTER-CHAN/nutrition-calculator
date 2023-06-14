@@ -1,5 +1,6 @@
 package com.misterchan.nutritioncalculator.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
 import com.misterchan.nutritioncalculator.Lists;
+import com.misterchan.nutritioncalculator.MainActivity;
 import com.misterchan.nutritioncalculator.databinding.FragmentFoodBinding;
 
 public class FoodListFragment extends ListFragment {
@@ -26,7 +28,9 @@ public class FoodListFragment extends ListFragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFoodBinding.inflate(inflater, container, false);
         String[] data = getArguments().getStringArray("data");
-        setListAdapter(new FoodAdapter(inflater.getContext(), data, onListItemCheckedChangedListener));
+        Context context = inflater.getContext();
+        setListAdapter(new FoodAdapter(context, data, onListItemCheckedChangedListener));
+        ((MainActivity) context).miTips.setVisible(false);
         return binding.getRoot();
     }
 

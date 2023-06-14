@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.misterchan.nutritioncalculator.Lists;
+import com.misterchan.nutritioncalculator.MainActivity;
 import com.misterchan.nutritioncalculator.databinding.FragmentCalendarBinding;
 
 import java.util.Calendar;
@@ -25,6 +26,7 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
+
         Calendar calendar = Calendar.getInstance();
         int y = calendar.get(Calendar.YEAR), m = calendar.get(Calendar.MONTH), d = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.clear();
@@ -44,6 +46,8 @@ public class CalendarFragment extends Fragment {
             Lists.I.checkedFoods.put(binding.cv.getDate(), new HashSet<>(Lists.I.checkedFoods.get(0L)));
             getActivity().onBackPressed();
         });
+
+        ((MainActivity) inflater.getContext()).miTips.setVisible(false);
         return binding.getRoot();
     }
 
