@@ -18,6 +18,7 @@ import java.util.Set;
 public class Lists {
     public static final Lists I = new Lists(); // Instance
 
+    private boolean hasDataPopulated = false;
     public final List<List<String>> foods = new ArrayList<>();
     public final List<String> categoryNames = new ArrayList<>();
     public final List<String> ageGenderNames = new ArrayList<>();
@@ -33,6 +34,10 @@ public class Lists {
     };
 
     public void populate(AssetManager assets) {
+        if (hasDataPopulated) {
+            return;
+        }
+        hasDataPopulated = true;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(assets.open("nutrients.txt")))) {
             String line = br.readLine();
             {
