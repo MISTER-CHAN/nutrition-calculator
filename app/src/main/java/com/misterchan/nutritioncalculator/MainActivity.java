@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         binding.ivTips.setOnClickListener(v -> v.setVisibility(View.GONE));
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (preferences.getBoolean("fr", true)) {
-            preferences.edit().putBoolean("fr", false).commit();
+            preferences.edit().putBoolean("fr", false).apply();
             binding.ivTips.setVisibility(View.VISIBLE);
         }
     }
