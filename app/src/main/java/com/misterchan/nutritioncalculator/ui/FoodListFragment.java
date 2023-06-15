@@ -3,6 +3,7 @@ package com.misterchan.nutritioncalculator.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -30,7 +31,11 @@ public class FoodListFragment extends ListFragment {
         String[] data = getArguments().getStringArray("data");
         Context context = inflater.getContext();
         setListAdapter(new FoodAdapter(context, data, onListItemCheckedChangedListener));
-        ((MainActivity) context).miTips.setVisible(false);
+
+        MenuItem miTips = ((MainActivity) context).miTips;
+        if (miTips != null) {
+            miTips.setVisible(false);
+        }
         return binding.getRoot();
     }
 

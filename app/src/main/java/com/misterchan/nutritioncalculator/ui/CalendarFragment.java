@@ -2,6 +2,7 @@ package com.misterchan.nutritioncalculator.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -47,7 +48,10 @@ public class CalendarFragment extends Fragment {
             getActivity().onBackPressed();
         });
 
-        ((MainActivity) inflater.getContext()).miTips.setVisible(false);
+        MenuItem miTips = ((MainActivity) inflater.getContext()).miTips;
+        if (miTips != null) {
+            miTips.setVisible(false);
+        }
         return binding.getRoot();
     }
 
